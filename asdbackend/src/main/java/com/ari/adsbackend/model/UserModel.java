@@ -8,10 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -39,6 +42,9 @@ public class UserModel implements Serializable {
         joinColumns = @JoinColumn(name = "USER_ID"),
         inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<RoleModel> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "author")
+    private List<ChildReportModel> childReportModels = new ArrayList<>();
 
     public UserModel() {
     }
@@ -106,8 +112,8 @@ public class UserModel implements Serializable {
         return roles;
     }
 
-    public void setRoles(Set<RoleModel> roles) {
-        this.roles = roles;
+    public List<ChildReportModel> getChildReportModels() {
+        return childReportModels;
     }
 
     @Override
