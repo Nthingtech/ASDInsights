@@ -49,15 +49,13 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
-    public UserModel(Long id, String firstName, String lastName, String email, String userProfile, String password, Set<RoleModel> roles) {
+    public UserModel(Long id, String firstName, String lastName, String email, String userProfile, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.userProfile = userProfile;
         this.password = password;
-        this.roles = roles;
-
     }
 
     public Long getId() {

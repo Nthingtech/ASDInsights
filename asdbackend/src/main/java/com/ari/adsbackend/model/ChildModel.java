@@ -41,12 +41,12 @@ public class ChildModel {
         this.id = id;
     }
 
-    public String getFisrtName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFisrtName(String fisrtName) {
-        this.firstName = fisrtName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

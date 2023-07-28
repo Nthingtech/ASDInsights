@@ -1,5 +1,6 @@
 package com.ari.adsbackend.model;
 
+import com.ari.adsbackend.model.enums.ChildFeel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ public class ChildReportModel implements Serializable {
     private Integer friendliness;
     private Integer communication;
     private Integer concentration;
+    private ChildFeel emotion;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
@@ -44,7 +46,7 @@ public class ChildReportModel implements Serializable {
 
     public ChildReportModel() {}
 
-    public ChildReportModel(Long id, LocalDate datePost, Integer dayRating, Integer socialInteraction, Integer anxiety, Integer pleasant, Integer impatience, Integer aggressiveness, Integer friendliness, Integer communication, Integer concentration, UserModel author, ChildModel child) {
+    public ChildReportModel(Long id, LocalDate datePost, Integer dayRating, Integer socialInteraction, Integer anxiety, Integer pleasant, Integer impatience, Integer aggressiveness, Integer friendliness, Integer communication, Integer concentration, ChildFeel emotion, UserModel author, ChildModel child) {
         this.id = id;
         this.datePost = datePost;
         this.dayRating = dayRating;
@@ -56,6 +58,7 @@ public class ChildReportModel implements Serializable {
         this.friendliness = friendliness;
         this.communication = communication;
         this.concentration = concentration;
+        this.emotion = emotion;
         this.author = author;
         this.child = child;
     }
@@ -146,6 +149,14 @@ public class ChildReportModel implements Serializable {
 
     public void setConcentration(Integer concentration) {
         this.concentration = concentration;
+    }
+
+    public ChildFeel getEmotion() {
+        return emotion;
+    }
+
+    public void setEmotion(ChildFeel emotion) {
+        this.emotion = emotion;
     }
 
     public UserModel getAuthor() {
