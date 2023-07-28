@@ -13,13 +13,19 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Service
 public class UserService {
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository repository;
@@ -28,8 +34,8 @@ public class UserService {
     private RoleRepository roleRepository;
 
     @Transactional(readOnly = true)
-    public Page<UserDTO> findAllPaged(PageRequest pageRequest) {
-        Page<UserModel> list = repository.findAll(pageRequest);
+    public Page<UserDTO> findAllPaged(Pageable pageable) {
+        Page<UserModel> list = repository.findAll(pageable);
         return list.map(x -> new UserDTO(x));
     }
 
@@ -44,7 +50,7 @@ public class UserService {
     public UserDTO insert(UserInsertDTO dto) {
         UserModel entity = new UserModel();
         copyDtoToEntity(dto,entity);
-        entity.setPassword(dto.getPassword());
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
         entity = repository.save(entity);
         return  new UserDTO(entity);
     }

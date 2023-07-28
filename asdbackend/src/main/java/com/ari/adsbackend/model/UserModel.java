@@ -1,5 +1,6 @@
 package com.ari.adsbackend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +32,7 @@ public class UserModel implements Serializable {
 
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
     private String userProfile;
