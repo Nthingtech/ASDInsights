@@ -12,18 +12,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 
 @Entity
 @Table(name = "TB_USERS")
-public class UserModel implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +41,8 @@ public class UserModel implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<RoleModel> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "author")
-    private List<ChildReportModel> childReportModels = new ArrayList<>();
+    @OneToMany(mappedBy = "userModel")
+    private Set<ChildReportModel> childReportModels = new HashSet<>();
 
     public UserModel() {
     }
@@ -112,9 +108,9 @@ public class UserModel implements Serializable {
         return roles;
     }
 
-    public List<ChildReportModel> getChildReportModels() {
+    public Set<ChildReportModel> getChildReportModels() {
         return childReportModels;
-    }
+    } //TODO mayb List?
 
     @Override
     public boolean equals(Object o) {

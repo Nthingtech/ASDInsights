@@ -1,27 +1,17 @@
-package com.ari.adsbackend.model;
+package com.ari.adsbackend.dto;
 
+import com.ari.adsbackend.model.ChildModel;
+import com.ari.adsbackend.model.ChildReportModel;
+import com.ari.adsbackend.model.UserModel;
 import com.ari.adsbackend.model.enums.ChildFeel;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
-@Entity
-@Table(name = "TB_REPORTS")
-public class ChildReportModel {
+public class ChildReportDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @PastOrPresent(message = "Post date cannot be in the future")
     private LocalDate datePost;
     private Integer dayRating;
     private Integer socialInteraction;
@@ -34,18 +24,16 @@ public class ChildReportModel {
     private Integer concentration;
     private ChildFeel emotion;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private UserModel userModel;
+    private UserModel author;
 
-    @ManyToOne
-    @JoinColumn(name = "child_id")
-    private  ChildModel childModel;
+    private ChildModel child;
 
-    public ChildReportModel() {}
+    public ChildReportDTO() {
+    }
 
-    public ChildReportModel(Long id, LocalDate datePost, Integer dayRating, Integer socialInteraction, Integer anxiety, Integer pleasant, Integer impatience,
-                            Integer aggressiveness, Integer friendliness, Integer communication, Integer concentration, ChildFeel emotion, UserModel userModel, ChildModel childModel) {
+    public ChildReportDTO(Long id, LocalDate datePost, Integer dayRating, Integer socialInteraction,
+                          Integer anxiety, Integer pleasant, Integer impatience, Integer aggressiveness, Integer friendliness, Integer communication,
+                          Integer concentration, ChildFeel emotion, UserModel author, ChildModel child) {
         this.id = id;
         this.datePost = datePost;
         this.dayRating = dayRating;
@@ -58,8 +46,25 @@ public class ChildReportModel {
         this.communication = communication;
         this.concentration = concentration;
         this.emotion = emotion;
-        this.userModel = userModel;
-        this.childModel = childModel;
+        this.author = author;
+        this.child = child;
+    }
+
+    public ChildReportDTO(ChildReportModel entity) {
+        id = entity.getId();
+        datePost = entity.getDatePost();
+        dayRating = entity.getDayRating();
+        socialInteraction = entity.getSocialInteraction();
+        anxiety = entity.getAnxiety();
+        pleasant = entity.getPleasant();
+        impatience = entity.getImpatience();
+        aggressiveness = entity.getAggressiveness();
+        friendliness = entity.getFriendliness();
+        communication = entity.getCommunication();
+        concentration = entity.getConcentration();
+        emotion = entity.getEmotion();
+        author = entity.getUserModel();
+        child = entity.getChildModel();
     }
 
     public Long getId() {
@@ -158,32 +163,19 @@ public class ChildReportModel {
         this.emotion = emotion;
     }
 
-    public UserModel getUserModel() {
-        return userModel;
+    public UserModel getAuthor() {
+        return author;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    public void setAuthor(UserModel author) {
+        this.author = author;
     }
 
-    public ChildModel getChildModel() {
-        return childModel;
+    public ChildModel getChild() {
+        return child;
     }
 
-    public void setChildModel(ChildModel childModel) {
-        this.childModel = childModel;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ChildReportModel that = (ChildReportModel) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setChild(ChildModel child) {
+        this.child = child;
     }
 }

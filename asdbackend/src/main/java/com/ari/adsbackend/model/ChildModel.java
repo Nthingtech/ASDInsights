@@ -7,9 +7,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "TB_CHILDS")
 public class ChildModel {
@@ -20,8 +21,8 @@ public class ChildModel {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "child")
-    private List<ChildReportModel> childReportModels = new ArrayList<>();
+    @OneToMany(mappedBy = "childModel")
+    private Set<ChildReportModel> childReportModels = new HashSet<>(); //TODO MAYBE LIST?
 
 
     public ChildModel() {
@@ -57,7 +58,7 @@ public class ChildModel {
         this.lastName = lastName;
     }
 
-    public List<ChildReportModel> getChildReportModels() {
+    public Set<ChildReportModel> getChildReportModels() {
         return childReportModels;
     }
 
