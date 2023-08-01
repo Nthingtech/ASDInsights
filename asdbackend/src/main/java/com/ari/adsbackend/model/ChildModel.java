@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "TB_CHILDS")
+@Table(name = "TB_CHILD")
 public class ChildModel {
 
     @Id

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TB_REPORTS")
+@Table(name = "TB_REPORT")
 public class ChildReportModel {
 
     @Id

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TB_ROLES")
+@Table(name = "TB_ROLE")
 public class RoleModel implements Serializable {
     private static final long seriaVersionUID = 1L;
 

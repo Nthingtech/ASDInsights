@@ -18,7 +18,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "TB_USERS")
+@Table(name = "TB_USER")
 public class UserModel {
 
     @Id
@@ -36,7 +36,7 @@ public class UserModel {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "TB_USERS_ROLES",
+    @JoinTable(name = "TB_USER_ROLE",
         joinColumns = @JoinColumn(name = "USER_ID"),
         inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<RoleModel> roles = new HashSet<>();
