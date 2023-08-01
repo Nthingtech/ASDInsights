@@ -1,6 +1,6 @@
 package com.ari.adsbackend.controller;
 
-import com.ari.adsbackend.model.ChildModel;
+import com.ari.adsbackend.dto.ChildDTO;
 import com.ari.adsbackend.services.ChildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,8 @@ public class ChildController {
     private ChildService service;
 
     @GetMapping
-    public ResponseEntity<List<ChildModel>> findAll() {
-        List<ChildModel> list = service.findAll();
+    public ResponseEntity<List<ChildDTO>> findAll() {
+        List<ChildDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
- //TODO NEXT : OBSERVAÇÕES IMPORTANTES SOBRE O SISTEMA
