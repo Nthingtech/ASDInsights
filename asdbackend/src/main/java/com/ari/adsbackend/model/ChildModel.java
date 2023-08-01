@@ -18,8 +18,7 @@ public class ChildModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String name;
 
     @OneToMany(mappedBy = "childModel")
     private Set<ChildReportModel> childReportModels = new HashSet<>(); //TODO MAYBE LIST?
@@ -28,10 +27,9 @@ public class ChildModel {
     public ChildModel() {
     }
 
-    public ChildModel(Long id, String firstName, String lastName) {
+    public ChildModel(Long id, String name) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
     }
 
     public Long getId() {
@@ -42,20 +40,12 @@ public class ChildModel {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<ChildReportModel> getChildReportModels() {

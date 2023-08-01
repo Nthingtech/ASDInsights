@@ -14,9 +14,7 @@ public class UserDTO {
     private Long id;
 
     @NotBlank(message = "Required field")
-    private String firstName;
-    @NotBlank(message = "Required field")
-    private String lastName;
+    private String name;
 
     @Email(message = "Please enter a valid email")
     private String email;
@@ -28,18 +26,16 @@ public class UserDTO {
 
     public UserDTO() {}
 
-    public UserDTO(Long id, String firstName, String lastName, String email, String userProfile) {
+    public UserDTO(Long id, String name, String lastName, String email, String userProfile) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.email = email;
         this.userProfile = userProfile;
     }
 
     public UserDTO(UserModel entity) {
         id = entity.getId();
-        firstName = entity.getFirstName();
-        lastName = entity.getLastName();
+        name = entity.getName();
         email = entity.getEmail();
         userProfile = entity.getUserProfile();
         entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
@@ -54,20 +50,12 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
