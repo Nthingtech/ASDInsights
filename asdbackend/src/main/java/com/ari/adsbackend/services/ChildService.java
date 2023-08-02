@@ -30,4 +30,12 @@ public class ChildService {
         ChildModel entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
         return new ChildDTO(entity);
     }
+
+    @Transactional
+    public ChildDTO insert(ChildDTO dto) {
+        var entity = new ChildModel();
+        entity.setName(dto.getName());
+        entity = repository.save(entity);
+        return new ChildDTO(entity);
+    }
 }
