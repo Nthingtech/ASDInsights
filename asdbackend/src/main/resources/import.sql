@@ -1,5 +1,5 @@
-INSERT INTO TB_USER (name, email, user_profile, password) VALUES ('Fernando Lopes', 'fe@gmail.com', 'Teacher', '123');
-INSERT INTO TB_USER (name, email, user_profile, password) VALUES ('Gustavo Ribeiro', 'guri@gmail.com', 'Healthcare Professionals', '456');
+INSERT INTO TB_USER (first_name, last_name, email, user_profile, password) VALUES ('Fernando', 'Lopes', 'fe@gmail.com', 'Teacher', '123');
+INSERT INTO TB_USER (first_name, last_name, email, user_profile, password) VALUES ('Gustavo', 'Ribeiro', 'guri@gmail.com', 'Healthcare Professionals', '456');
 
 
 INSERT INTO TB_ROLE (authority) VALUES ('ROLE_TEACHER');

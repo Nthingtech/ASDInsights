@@ -24,7 +24,8 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
 
     @Column(unique = true)
     private String email;
@@ -45,9 +46,10 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(Long id, String name, String lastName, String email, String userProfile, String password) {
+    public UserModel(Long id, String firstName, String lastName, String email, String userProfile, String password) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.userProfile = userProfile;
         this.password = password;
@@ -61,12 +63,20 @@ public class UserModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

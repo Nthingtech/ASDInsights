@@ -3,7 +3,8 @@ package com.ari.adsbackend.services;
 import com.ari.adsbackend.dto.ChildDTO;
 import com.ari.adsbackend.model.ChildModel;
 import com.ari.adsbackend.repositories.ChildRepository;
-import com.ari.adsbackend.services.exceptions.EntityNotFoundException;
+import com.ari.adsbackend.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class ChildService {
     @Transactional(readOnly = true)
     public ChildDTO findById(Long id) {
         Optional<ChildModel> obj = repository.findById(id);
-        ChildModel entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+        ChildModel entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return new ChildDTO(entity);
     }
 
@@ -37,5 +38,17 @@ public class ChildService {
         entity.setName(dto.getName());
         entity = repository.save(entity);
         return new ChildDTO(entity);
+    }
+
+    public ChildDTO update(Long id, ChildDTO dto) {
+        try {
+            ChildModel entity = repository.getReferenceById(id);
+            entity.setName(dto.getName());
+            entity = repository.save(entity);
+            return new ChildDTO(entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
     }
 }
