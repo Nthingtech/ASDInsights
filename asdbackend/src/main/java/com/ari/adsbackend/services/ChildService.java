@@ -3,10 +3,13 @@ package com.ari.adsbackend.services;
 import com.ari.adsbackend.dto.ChildDTO;
 import com.ari.adsbackend.model.ChildModel;
 import com.ari.adsbackend.repositories.ChildRepository;
+import com.ari.adsbackend.services.exceptions.DatabaseException;
 import com.ari.adsbackend.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -40,6 +43,7 @@ public class ChildService {
         return new ChildDTO(entity);
     }
 
+    @Transactional
     public ChildDTO update(Long id, ChildDTO dto) {
         try {
             ChildModel entity = repository.getReferenceById(id);
@@ -51,4 +55,18 @@ public class ChildService {
             throw new ResourceNotFoundException("Id not found " + id);
         }
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void delete(Long id) {
+        if (!repository.existsById(id)){
+            throw new ResourceNotFoundException("Resource not found");
+        }
+        try {
+            repository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Integrity violation");
+        }
+    }
+
 }

@@ -4,14 +4,13 @@ import com.ari.adsbackend.model.ChildModel;
 import com.ari.adsbackend.model.ChildReportModel;
 import com.ari.adsbackend.model.UserModel;
 import com.ari.adsbackend.model.enums.ChildFeel;
-import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
 public class ChildReportDTO {
 
     private Long id;
-    @PastOrPresent(message = "Post date cannot be in the future")
+    //@PastOrPresent(message = "Post date cannot be in the future")
     private LocalDate datePost;
     private Integer dayRating;
     private Integer socialInteraction;
@@ -24,16 +23,16 @@ public class ChildReportDTO {
     private Integer concentration;
     private ChildFeel emotion;
 
-    private UserModel author;
+    private UserModel userModel;
 
-    private ChildModel child;
+    private ChildModel childModel;
 
     public ChildReportDTO() {
     }
 
     public ChildReportDTO(Long id, LocalDate datePost, Integer dayRating, Integer socialInteraction,
                           Integer anxiety, Integer pleasant, Integer impatience, Integer aggressiveness, Integer friendliness, Integer communication,
-                          Integer concentration, ChildFeel emotion, UserModel author, ChildModel child) {
+                          Integer concentration, ChildFeel emotion, UserModel userModel, ChildModel childModel) {
         this.id = id;
         this.datePost = datePost;
         this.dayRating = dayRating;
@@ -46,8 +45,8 @@ public class ChildReportDTO {
         this.communication = communication;
         this.concentration = concentration;
         this.emotion = emotion;
-        this.author = author;
-        this.child = child;
+        this.userModel = userModel;
+        this.childModel = childModel;
     }
 
     public ChildReportDTO(ChildReportModel entity) {
@@ -63,8 +62,8 @@ public class ChildReportDTO {
         communication = entity.getCommunication();
         concentration = entity.getConcentration();
         emotion = entity.getEmotion();
-        author = entity.getUserModel();
-        child = entity.getChildModel();
+        userModel = entity.getUserModel();
+        childModel = entity.getChildModel();
     }
 
     public Long getId() {
@@ -163,19 +162,19 @@ public class ChildReportDTO {
         this.emotion = emotion;
     }
 
-    public UserModel getAuthor() {
-        return author;
+    public UserModel getUserModel() {
+        return userModel;
     }
 
-    public void setAuthor(UserModel author) {
-        this.author = author;
+    public void setAuthor(UserModel userModel) {
+        this.userModel = userModel;
     }
 
-    public ChildModel getChild() {
-        return child;
+    public ChildModel getChildModel() {
+        return childModel;
     }
 
-    public void setChild(ChildModel child) {
-        this.child = child;
+    public void setChild(ChildModel childModel) {
+        this.childModel = childModel;
     }
 }

@@ -2,15 +2,12 @@ package com.ari.adsbackend.dto;
 
 import com.ari.adsbackend.model.ChildModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChildDTO {
 
     private Long id;
     private String name;
 
-    private List<ChildReportDTO> childReportDTOS = new ArrayList<>();
+    //private List<ChildReportDTO> childReportDTOS = new ArrayList<>();
 
     public ChildDTO() {
     }
@@ -23,7 +20,7 @@ public class ChildDTO {
     public ChildDTO(ChildModel entity) {
         id = entity.getId();
         name = entity.getName();
-        entity.getChildReportModels().forEach(childReportModel -> this.childReportDTOS.add(new ChildReportDTO(childReportModel)));
+        //entity.getChildReportModels().forEach(childReportModel -> this.childReportDTOS.add(new ChildReportDTO(childReportModel)));
     }
 
     public Long getId() {
@@ -42,8 +39,8 @@ public class ChildDTO {
         this.name = name;
     }
 
-    public List<ChildReportDTO> getChildReportDTOS() {
+    /*public List<ChildReportDTO> getChildReportDTOS() {
         return childReportDTOS;
-    }
+    }*/
 
 }

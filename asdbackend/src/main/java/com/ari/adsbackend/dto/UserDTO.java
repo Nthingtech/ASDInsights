@@ -1,31 +1,26 @@
 package com.ari.adsbackend.dto;
 
 import com.ari.adsbackend.model.UserModel;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class UserDTO {
 
     private Long id;
 
-    @NotBlank(message = "Required field")
+    //@NotBlank(message = "Required field")
     private String firstName;
 
-    @NotBlank(message = "Required field")
+    //@NotBlank(message = "Required field")
     private String lastName;
 
-    @Email(message = "Please enter a valid email")
+    //@Email(message = "Please enter a valid email")
     private String email;
     private String userProfile;
 
     Set<RoleDTO> roles = new HashSet<>();
 
-    List<ChildReportDTO> childReportDTOS = new ArrayList<>();
 
     public UserDTO() {}
 
@@ -44,7 +39,6 @@ public class UserDTO {
         email = entity.getEmail();
         userProfile = entity.getUserProfile();
         entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
-        entity.getChildReportModels().forEach(childReport -> this.childReportDTOS.add(new ChildReportDTO(childReport)) );
     }
 
     public Long getId() {
@@ -91,7 +85,4 @@ public class UserDTO {
         return roles;
     }
 
-    public List<ChildReportDTO> getChildReportDTOS() {
-        return childReportDTOS;
-    }
 }

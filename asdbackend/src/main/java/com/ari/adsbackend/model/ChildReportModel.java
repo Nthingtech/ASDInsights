@@ -35,7 +35,7 @@ public class ChildReportModel {
     private ChildFeel emotion;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "user_id")
     private UserModel userModel;
 
     @ManyToOne
