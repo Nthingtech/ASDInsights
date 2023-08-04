@@ -3,6 +3,8 @@ package com.ari.adsbackend.controller;
 import com.ari.adsbackend.dto.ChildDTO;
 import com.ari.adsbackend.services.ChildService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/children")
@@ -25,8 +26,8 @@ public class ChildController {
     private ChildService service;
 
     @GetMapping
-    public ResponseEntity<List<ChildDTO>> findAll() {
-        List<ChildDTO> list = service.findAll();
+    public ResponseEntity<Page<ChildDTO>> findAll(Pageable pageable) {
+        Page<ChildDTO> list = service.findAllPaged(pageable);
         return ResponseEntity.ok().body(list);
     }
 

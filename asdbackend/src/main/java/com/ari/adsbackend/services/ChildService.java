@@ -8,13 +8,13 @@ import com.ari.adsbackend.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ChildService {
@@ -23,9 +23,9 @@ public class ChildService {
     private ChildRepository repository;
 
     @Transactional(readOnly = true)
-    public List<ChildDTO> findAll() {
-        List<ChildModel> list = repository.findAll();
-        return list.stream().map(x -> new ChildDTO(x)).collect(Collectors.toList());
+    public Page<ChildDTO> findAllPaged(Pageable pageable) {
+        Page<ChildModel> list = repository.findAll(pageable);
+        return list.map(x -> new ChildDTO(x));
     }
 
     @Transactional(readOnly = true)
