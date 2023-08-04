@@ -1,16 +1,15 @@
 package com.ari.adsbackend.dto;
 
-import com.ari.adsbackend.model.ChildModel;
 import com.ari.adsbackend.model.ChildReportModel;
-import com.ari.adsbackend.model.UserModel;
 import com.ari.adsbackend.model.enums.ChildFeel;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
 public class ChildReportDTO {
 
     private Long id;
-    //@PastOrPresent(message = "Post date cannot be in the future")
+    @PastOrPresent(message = "Post date cannot be in the future")
     private LocalDate datePost;
     private Integer dayRating;
     private Integer socialInteraction;
@@ -23,16 +22,16 @@ public class ChildReportDTO {
     private Integer concentration;
     private ChildFeel emotion;
 
-    private UserModel userModel;
+    private UserDTO userModel;
 
-    private ChildModel childModel;
+    private ChildDTO childModel;
 
     public ChildReportDTO() {
     }
 
     public ChildReportDTO(Long id, LocalDate datePost, Integer dayRating, Integer socialInteraction,
                           Integer anxiety, Integer pleasant, Integer impatience, Integer aggressiveness, Integer friendliness, Integer communication,
-                          Integer concentration, ChildFeel emotion, UserModel userModel, ChildModel childModel) {
+                          Integer concentration, ChildFeel emotion, UserDTO userModel, ChildDTO childModel) {
         this.id = id;
         this.datePost = datePost;
         this.dayRating = dayRating;
@@ -62,8 +61,8 @@ public class ChildReportDTO {
         communication = entity.getCommunication();
         concentration = entity.getConcentration();
         emotion = entity.getEmotion();
-        userModel = entity.getUserModel();
-        childModel = entity.getChildModel();
+        userModel = new UserDTO(entity.getUserModel());
+        childModel = new ChildDTO(entity.getChildModel());
     }
 
     public Long getId() {
@@ -162,19 +161,22 @@ public class ChildReportDTO {
         this.emotion = emotion;
     }
 
-    public UserModel getUserModel() {
+    public UserDTO getUserModel() {
         return userModel;
     }
 
-    public void setAuthor(UserModel userModel) {
+    public void setUserModel(UserDTO userModel) {
         this.userModel = userModel;
     }
 
-    public ChildModel getChildModel() {
+    public ChildDTO getChildModel() {
         return childModel;
     }
 
-    public void setChild(ChildModel childModel) {
+    public void setChildModel(ChildDTO childModel) {
         this.childModel = childModel;
     }
 }
+
+
+//TODO ProductDTO

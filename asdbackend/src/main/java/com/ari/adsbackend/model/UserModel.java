@@ -12,7 +12,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,7 +43,7 @@ public class UserModel {
     private Set<RoleModel> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "userModel")
-    private Set<ChildReportModel> childReportModels = new HashSet<>();
+    private List<ChildReportModel> childReportModels = new ArrayList<>();
 
     public UserModel() {
     }
@@ -107,7 +109,7 @@ public class UserModel {
         return roles;
     }
 
-    public Set<ChildReportModel> getChildReportModels() {
+    public List<ChildReportModel> getChildReportModels() {
         return childReportModels;
     } //TODO mayb List?
 

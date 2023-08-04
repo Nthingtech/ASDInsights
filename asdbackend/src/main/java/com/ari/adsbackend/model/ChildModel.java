@@ -11,9 +11,9 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 import java.time.Instant;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "TB_CHILD")
@@ -31,7 +31,7 @@ public class ChildModel {
     private Instant updatedAt;
 
     @OneToMany(mappedBy = "childModel")
-    private Set<ChildReportModel> childReportModels = new HashSet<>(); //TODO MAYBE LIST?
+    private List<ChildReportModel> childReportModels = new ArrayList<>();
 
 
     public ChildModel() {
@@ -77,7 +77,7 @@ public class ChildModel {
     }
 
 
-    public Set<ChildReportModel> getChildReportModels() {
+    public List<ChildReportModel> getChildReportModels() {
         return childReportModels;
     }
 

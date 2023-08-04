@@ -7,7 +7,6 @@ public class ChildDTO {
     private Long id;
     private String name;
 
-    //private List<ChildReportDTO> childReportDTOS = new ArrayList<>();
 
     public ChildDTO() {
     }
@@ -39,8 +38,6 @@ public class ChildDTO {
         this.name = name;
     }
 
-    /*public List<ChildReportDTO> getChildReportDTOS() {
-        return childReportDTOS;
-    }*/
+
 
 }
